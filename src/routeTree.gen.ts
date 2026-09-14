@@ -14,7 +14,11 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppPerfilRouteImport } from './routes/app.perfil'
+import { Route as AppCurriculosIndexRouteImport } from './routes/app.curriculos.index'
+import { Route as AppCurriculosResumeIdRouteImport } from './routes/app.curriculos.$resumeId'
 import { Route as AppVagasIndexRouteImport } from './routes/app.vagas.index'
+import { Route as AppVagasJobIdRouteImport } from './routes/app.vagas.$jobId'
+import { Route as AppVagasNovaRouteImport } from './routes/app.vagas.nova'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,9 +45,29 @@ const AppPerfilRoute = AppPerfilRouteImport.update({
   path: '/perfil',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCurriculosIndexRoute = AppCurriculosIndexRouteImport.update({
+  id: '/curriculos/',
+  path: '/curriculos/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCurriculosResumeIdRoute = AppCurriculosResumeIdRouteImport.update({
+  id: '/curriculos/$resumeId',
+  path: '/curriculos/$resumeId',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppVagasIndexRoute = AppVagasIndexRouteImport.update({
   id: '/vagas/',
   path: '/vagas/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVagasJobIdRoute = AppVagasJobIdRouteImport.update({
+  id: '/vagas/$jobId',
+  path: '/vagas/$jobId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVagasNovaRoute = AppVagasNovaRouteImport.update({
+  id: '/vagas/nova',
+  path: '/vagas/nova',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -53,6 +77,10 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
+  '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
+  '/app/curriculos/': typeof AppCurriculosIndexRoute
   '/app/vagas/': typeof AppVagasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +88,10 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app': typeof AppIndexRoute
+  '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
+  '/app/curriculos': typeof AppCurriculosIndexRoute
   '/app/vagas': typeof AppVagasIndexRoute
 }
 export interface FileRoutesById {
@@ -69,14 +101,36 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
+  '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
+  '/app/curriculos/': typeof AppCurriculosIndexRoute
   '/app/vagas/': typeof AppVagasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/app' | '/onboarding' | '/app/perfil' | '/app/' | '/app/vagas/'
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/app/perfil'
+    | '/app/'
+    | '/app/curriculos/$resumeId'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
+    | '/app/curriculos/'
+    | '/app/vagas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/onboarding' | '/app/perfil' | '/app' | '/app/vagas'
+  to:
+    | '/'
+    | '/onboarding'
+    | '/app/perfil'
+    | '/app'
+    | '/app/curriculos/$resumeId'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
+    | '/app/curriculos'
+    | '/app/vagas'
   id:
     | '__root__'
     | '/'
@@ -84,6 +138,10 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/perfil'
     | '/app/'
+    | '/app/curriculos/$resumeId'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
+    | '/app/curriculos/'
     | '/app/vagas/'
   fileRoutesById: FileRoutesById
 }
@@ -130,11 +188,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPerfilRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/curriculos/': {
+      id: '/app/curriculos/'
+      path: '/curriculos'
+      fullPath: '/app/curriculos/'
+      preLoaderRoute: typeof AppCurriculosIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/curriculos/$resumeId': {
+      id: '/app/curriculos/$resumeId'
+      path: '/curriculos/$resumeId'
+      fullPath: '/app/curriculos/$resumeId'
+      preLoaderRoute: typeof AppCurriculosResumeIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/vagas/': {
       id: '/app/vagas/'
       path: '/vagas'
       fullPath: '/app/vagas/'
       preLoaderRoute: typeof AppVagasIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/vagas/$jobId': {
+      id: '/app/vagas/$jobId'
+      path: '/vagas/$jobId'
+      fullPath: '/app/vagas/$jobId'
+      preLoaderRoute: typeof AppVagasJobIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/vagas/nova': {
+      id: '/app/vagas/nova'
+      path: '/vagas/nova'
+      fullPath: '/app/vagas/nova'
+      preLoaderRoute: typeof AppVagasNovaRouteImport
       parentRoute: typeof AppRoute
     }
   }
@@ -143,12 +229,20 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppPerfilRoute: typeof AppPerfilRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppCurriculosResumeIdRoute: typeof AppCurriculosResumeIdRoute
+  AppVagasJobIdRoute: typeof AppVagasJobIdRoute
+  AppVagasNovaRoute: typeof AppVagasNovaRoute
+  AppCurriculosIndexRoute: typeof AppCurriculosIndexRoute
   AppVagasIndexRoute: typeof AppVagasIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppPerfilRoute: AppPerfilRoute,
   AppIndexRoute: AppIndexRoute,
+  AppCurriculosResumeIdRoute: AppCurriculosResumeIdRoute,
+  AppVagasJobIdRoute: AppVagasJobIdRoute,
+  AppVagasNovaRoute: AppVagasNovaRoute,
+  AppCurriculosIndexRoute: AppCurriculosIndexRoute,
   AppVagasIndexRoute: AppVagasIndexRoute,
 }
 
