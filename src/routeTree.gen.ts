@@ -15,6 +15,8 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppVagasIndexRouteImport } from './routes/app.vagas.index'
+import { Route as AppVagasJobIdRouteImport } from './routes/app.vagas.$jobId'
+import { Route as AppVagasNovaRouteImport } from './routes/app.vagas.nova'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +48,16 @@ const AppVagasIndexRoute = AppVagasIndexRouteImport.update({
   path: '/vagas/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVagasJobIdRoute = AppVagasJobIdRouteImport.update({
+  id: '/vagas/$jobId',
+  path: '/vagas/$jobId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVagasNovaRoute = AppVagasNovaRouteImport.update({
+  id: '/vagas/nova',
+  path: '/vagas/nova',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +65,8 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
   '/app/vagas/': typeof AppVagasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +74,8 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app': typeof AppIndexRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
   '/app/vagas': typeof AppVagasIndexRoute
 }
 export interface FileRoutesById {
@@ -69,14 +85,30 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
+  '/app/vagas/$jobId': typeof AppVagasJobIdRoute
+  '/app/vagas/nova': typeof AppVagasNovaRoute
   '/app/vagas/': typeof AppVagasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/app' | '/onboarding' | '/app/perfil' | '/app/' | '/app/vagas/'
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/app/perfil'
+    | '/app/'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
+    | '/app/vagas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/onboarding' | '/app/perfil' | '/app' | '/app/vagas'
+  to:
+    | '/'
+    | '/onboarding'
+    | '/app/perfil'
+    | '/app'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
+    | '/app/vagas'
   id:
     | '__root__'
     | '/'
@@ -84,6 +116,8 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/perfil'
     | '/app/'
+    | '/app/vagas/$jobId'
+    | '/app/vagas/nova'
     | '/app/vagas/'
   fileRoutesById: FileRoutesById
 }
@@ -137,18 +171,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVagasIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/vagas/$jobId': {
+      id: '/app/vagas/$jobId'
+      path: '/vagas/$jobId'
+      fullPath: '/app/vagas/$jobId'
+      preLoaderRoute: typeof AppVagasJobIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/vagas/nova': {
+      id: '/app/vagas/nova'
+      path: '/vagas/nova'
+      fullPath: '/app/vagas/nova'
+      preLoaderRoute: typeof AppVagasNovaRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppPerfilRoute: typeof AppPerfilRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppVagasJobIdRoute: typeof AppVagasJobIdRoute
+  AppVagasNovaRoute: typeof AppVagasNovaRoute
   AppVagasIndexRoute: typeof AppVagasIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppPerfilRoute: AppPerfilRoute,
   AppIndexRoute: AppIndexRoute,
+  AppVagasJobIdRoute: AppVagasJobIdRoute,
+  AppVagasNovaRoute: AppVagasNovaRoute,
   AppVagasIndexRoute: AppVagasIndexRoute,
 }
 
