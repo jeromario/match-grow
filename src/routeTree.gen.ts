@@ -14,6 +14,8 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppCandidaturasRouteImport } from './routes/app.candidaturas'
+import { Route as AppConfiguracoesRouteImport } from './routes/app.configuracoes'
+import { Route as AppHistoricoRouteImport } from './routes/app.historico'
 import { Route as AppImportarRouteImport } from './routes/app.importar'
 import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppCurriculosIndexRouteImport } from './routes/app.curriculos.index'
@@ -45,6 +47,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const AppCandidaturasRoute = AppCandidaturasRouteImport.update({
   id: '/candidaturas',
   path: '/candidaturas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConfiguracoesRoute = AppConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoricoRoute = AppHistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
   getParentRoute: () => AppRoute,
 } as any)
 const AppImportarRoute = AppImportarRouteImport.update({
@@ -88,6 +100,8 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/historico': typeof AppHistoricoRoute
   '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
@@ -101,6 +115,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/onboarding': typeof OnboardingRoute
   '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/historico': typeof AppHistoricoRoute
   '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app': typeof AppIndexRoute
@@ -116,6 +132,8 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/configuracoes': typeof AppConfiguracoesRoute
+  '/app/historico': typeof AppHistoricoRoute
   '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
@@ -132,6 +150,8 @@ export interface FileRouteTypes {
     | '/app'
     | '/onboarding'
     | '/app/candidaturas'
+    | '/app/configuracoes'
+    | '/app/historico'
     | '/app/importar'
     | '/app/perfil'
     | '/app/'
@@ -145,6 +165,8 @@ export interface FileRouteTypes {
     | '/'
     | '/onboarding'
     | '/app/candidaturas'
+    | '/app/configuracoes'
+    | '/app/historico'
     | '/app/importar'
     | '/app/perfil'
     | '/app'
@@ -159,6 +181,8 @@ export interface FileRouteTypes {
     | '/app'
     | '/onboarding'
     | '/app/candidaturas'
+    | '/app/configuracoes'
+    | '/app/historico'
     | '/app/importar'
     | '/app/perfil'
     | '/app/'
@@ -210,6 +234,20 @@ declare module '@tanstack/react-router' {
       path: '/candidaturas'
       fullPath: '/app/candidaturas'
       preLoaderRoute: typeof AppCandidaturasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/configuracoes': {
+      id: '/app/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/app/configuracoes'
+      preLoaderRoute: typeof AppConfiguracoesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/historico': {
+      id: '/app/historico'
+      path: '/historico'
+      fullPath: '/app/historico'
+      preLoaderRoute: typeof AppHistoricoRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/importar': {
@@ -266,6 +304,8 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppCandidaturasRoute: typeof AppCandidaturasRoute
+  AppConfiguracoesRoute: typeof AppConfiguracoesRoute
+  AppHistoricoRoute: typeof AppHistoricoRoute
   AppImportarRoute: typeof AppImportarRoute
   AppPerfilRoute: typeof AppPerfilRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -278,6 +318,8 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppCandidaturasRoute: AppCandidaturasRoute,
+  AppConfiguracoesRoute: AppConfiguracoesRoute,
+  AppHistoricoRoute: AppHistoricoRoute,
   AppImportarRoute: AppImportarRoute,
   AppPerfilRoute: AppPerfilRoute,
   AppIndexRoute: AppIndexRoute,
