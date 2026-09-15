@@ -24,7 +24,8 @@ function extractFromText(text: string) {
   const phone = text.match(/(\(?\d{2}\)?\s?)?9?\d{4}[-\s]?\d{4}/)?.[0] ?? "";
   const linkedin = text.match(/https?:\/\/(www\.)?linkedin\.com\/[^\s]+/)?.[0] ?? "";
   const github = text.match(/https?:\/\/(www\.)?github\.com\/[^\s]+/)?.[0] ?? "";
-  const fullName = lines[0]?.length < 60 ? lines[0] : "";
+  const firstLine = lines[0] ?? "";
+  const fullName = firstLine.length < 60 ? firstLine : "";
   const summaryIndex = lines.findIndex((l) => /resumo|objetivo|sobre mim/i.test(l));
   const summary = summaryIndex >= 0 ? lines.slice(summaryIndex + 1, summaryIndex + 5).join(" ") : "";
   return { fullName, email, phone, linkedin, github, summary };

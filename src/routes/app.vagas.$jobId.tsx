@@ -56,6 +56,7 @@ function JobDetail() {
       }, 600);
       return () => clearTimeout(t);
     }
+    return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jobId, job, match]);
 
@@ -337,7 +338,7 @@ function JobDetail() {
               <CardDescription>Acompanhe o andamento deste processo.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Select value={application?.status ?? undefined} onValueChange={(v) => setStatus(v as ApplicationStatus)}>
+              <Select value={application?.status ?? ""} onValueChange={(v) => setStatus(v as ApplicationStatus)}>
                 <SelectTrigger aria-label="Status da candidatura">
                   <SelectValue placeholder="Registrar candidatura" />
                 </SelectTrigger>

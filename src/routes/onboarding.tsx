@@ -46,7 +46,7 @@ export const Route = createFileRoute("/onboarding")({
 const seniorities: Seniority[] = ["Estágio", "Júnior", "Pleno", "Sênior", "Especialista", "Liderança"];
 const workModes: WorkMode[] = ["Presencial", "Híbrido", "Remoto", "Indiferente"];
 
-const stepTitles = [
+const stepTitles: { title: string; description: string }[] = [
   { title: "Informações básicas", description: "Como as empresas podem te encontrar." },
   { title: "Objetivo profissional", description: "O que você procura na próxima oportunidade." },
   { title: "Experiência", description: "Sua trajetória profissional." },
@@ -104,8 +104,8 @@ function Onboarding() {
 
         <Card>
           <CardHeader>
-            <CardTitle>{stepTitles[step].title}</CardTitle>
-            <CardDescription>{stepTitles[step].description}</CardDescription>
+            <CardTitle>{stepTitles[step]?.title}</CardTitle>
+            <CardDescription>{stepTitles[step]?.description}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
             {step === 0 && (
@@ -150,7 +150,7 @@ function Onboarding() {
                 </Field>
                 <Field label="Nível de experiência" id="level">
                   <Select
-                    value={p.experienceLevel || undefined}
+                    value={p.experienceLevel}
                     onValueChange={(v) => set({ experienceLevel: v as Seniority })}
                   >
                     <SelectTrigger id="level">
@@ -180,7 +180,7 @@ function Onboarding() {
                   />
                 </Field>
                 <Field label="Tipo de contratação" id="contract">
-                  <Select value={p.contractType || undefined} onValueChange={(v) => set({ contractType: v })}>
+                  <Select value={p.contractType} onValueChange={(v) => set({ contractType: v })}>
                     <SelectTrigger id="contract">
                       <SelectValue placeholder="Selecione" />
                     </SelectTrigger>
@@ -195,7 +195,7 @@ function Onboarding() {
                 </Field>
                 <Field label="Modalidade" id="mode">
                   <Select
-                    value={p.preferredWorkMode || undefined}
+                    value={p.preferredWorkMode}
                     onValueChange={(v) => set({ preferredWorkMode: v as WorkMode })}
                   >
                     <SelectTrigger id="mode">
