@@ -46,7 +46,7 @@ export const Route = createFileRoute("/onboarding")({
 const seniorities: Seniority[] = ["Estágio", "Júnior", "Pleno", "Sênior", "Especialista", "Liderança"];
 const workModes: WorkMode[] = ["Presencial", "Híbrido", "Remoto", "Indiferente"];
 
-const stepTitles = [
+const stepTitles: { title: string; description: string }[] = [
   { title: "Informações básicas", description: "Como as empresas podem te encontrar." },
   { title: "Objetivo profissional", description: "O que você procura na próxima oportunidade." },
   { title: "Experiência", description: "Sua trajetória profissional." },
@@ -104,8 +104,8 @@ function Onboarding() {
 
         <Card>
           <CardHeader>
-            <CardTitle>{stepTitles[step].title}</CardTitle>
-            <CardDescription>{stepTitles[step].description}</CardDescription>
+            <CardTitle>{stepTitles[step]?.title}</CardTitle>
+            <CardDescription>{stepTitles[step]?.description}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
             {step === 0 && (

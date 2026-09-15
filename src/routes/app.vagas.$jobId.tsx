@@ -56,6 +56,7 @@ function JobDetail() {
       }, 600);
       return () => clearTimeout(t);
     }
+    return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jobId, job, match]);
 
