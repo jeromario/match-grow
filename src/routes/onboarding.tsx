@@ -150,7 +150,7 @@ function Onboarding() {
                 </Field>
                 <Field label="Nível de experiência" id="level">
                   <Select
-                    value={p.experienceLevel || undefined}
+                    value={p.experienceLevel}
                     onValueChange={(v) => set({ experienceLevel: v as Seniority })}
                   >
                     <SelectTrigger id="level">
@@ -180,7 +180,7 @@ function Onboarding() {
                   />
                 </Field>
                 <Field label="Tipo de contratação" id="contract">
-                  <Select value={p.contractType || undefined} onValueChange={(v) => set({ contractType: v })}>
+                  <Select value={p.contractType} onValueChange={(v) => set({ contractType: v })}>
                     <SelectTrigger id="contract">
                       <SelectValue placeholder="Selecione" />
                     </SelectTrigger>
@@ -195,7 +195,7 @@ function Onboarding() {
                 </Field>
                 <Field label="Modalidade" id="mode">
                   <Select
-                    value={p.preferredWorkMode || undefined}
+                    value={p.preferredWorkMode}
                     onValueChange={(v) => set({ preferredWorkMode: v as WorkMode })}
                   >
                     <SelectTrigger id="mode">

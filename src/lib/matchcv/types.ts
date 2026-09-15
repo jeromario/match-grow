@@ -93,10 +93,10 @@ export interface Resume {
   id: string;
   name: string;
   type: "base" | "tailored";
-  jobId?: string;
+  jobId?: string | undefined;
   content: ResumeContent;
-  atsScore?: number;
-  notes?: string[];
+  atsScore?: number | undefined;
+  notes?: string[] | undefined;
   createdAt: string;
   updatedAt: string;
 }
@@ -115,7 +115,7 @@ export interface Job {
   niceToHave: string;
   benefits: string;
   area: string;
-  isDemo?: boolean;
+  isDemo?: boolean | undefined;
   createdAt: string;
   publishedAt: string;
 }
@@ -155,10 +155,10 @@ export type ApplicationStatus =
 export interface Application {
   id: string;
   jobId: string;
-  resumeId?: string;
+  resumeId?: string | undefined;
   status: ApplicationStatus;
-  matchScore?: number;
-  appliedAt?: string;
+  matchScore?: number | undefined;
+  appliedAt?: string | undefined;
   notes: string;
   createdAt: string;
   updatedAt: string;

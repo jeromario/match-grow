@@ -22,14 +22,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const mainItems = [
+const mainItems: { title: string; url: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { title: "Dashboard", url: "/app", icon: LayoutDashboard, exact: true },
   { title: "Vagas", url: "/app/vagas", icon: Briefcase },
   { title: "Meu Perfil", url: "/app/perfil", icon: User },
   { title: "Meus Currículos", url: "/app/curriculos", icon: FileText },
   { title: "Minhas Candidaturas", url: "/app/candidaturas", icon: Send },
   { title: "Histórico", url: "/app/historico", icon: History },
-] as const;
+];
 
 export function AppSidebar() {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
@@ -57,7 +57,7 @@ export function AppSidebar() {
               {mainItems.map((item) => (
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url, item.exact)} tooltip={item.title}>
-                    <Link to={item.url}>
+                    <Link to={item.url as never}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>

@@ -6,7 +6,7 @@ import { Building2, MapPin, Wallet } from "lucide-react";
 import type { Job, MatchResult } from "@/lib/matchcv/types";
 import { SkillBadge } from "./common";
 
-export function JobCard({ job, match }: { job: Job; match?: MatchResult }) {
+export function JobCard({ job, match }: { job: Job; match?: MatchResult | undefined }) {
   return (
     <Card className="flex h-full flex-col transition-shadow hover:shadow-md">
       <CardHeader className="pb-3">

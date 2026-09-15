@@ -70,7 +70,7 @@ function SettingsPage() {
             </Field>
             <Field label="Modalidade" id="s-mode">
               <Select
-                value={p.preferredWorkMode || undefined}
+                value={p.preferredWorkMode}
                 onValueChange={(v) => setProfile((prev) => ({ ...prev, preferredWorkMode: v as WorkMode }))}
               >
                 <SelectTrigger id="s-mode">

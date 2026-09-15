@@ -111,7 +111,7 @@ function ProfilePage() {
               </Field>
               <Field label="Nível de experiência" id="p-level">
                 <Select
-                  value={p.experienceLevel || undefined}
+                  value={p.experienceLevel}
                   onValueChange={(v) => set({ experienceLevel: v as Seniority })}
                 >
                   <SelectTrigger id="p-level">
@@ -128,7 +128,7 @@ function ProfilePage() {
               </Field>
               <Field label="Modalidade preferida" id="p-mode">
                 <Select
-                  value={p.preferredWorkMode || undefined}
+                  value={p.preferredWorkMode}
                   onValueChange={(v) => set({ preferredWorkMode: v as WorkMode })}
                 >
                   <SelectTrigger id="p-mode">
