@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppCandidaturasRouteImport } from './routes/app.candidaturas'
+import { Route as AppImportarRouteImport } from './routes/app.importar'
 import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppCurriculosIndexRouteImport } from './routes/app.curriculos.index'
 import { Route as AppCurriculosResumeIdRouteImport } from './routes/app.curriculos.$resumeId'
@@ -38,6 +40,16 @@ const OnboardingRoute = OnboardingRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCandidaturasRoute = AppCandidaturasRouteImport.update({
+  id: '/candidaturas',
+  path: '/candidaturas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppImportarRoute = AppImportarRouteImport.update({
+  id: '/importar',
+  path: '/importar',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPerfilRoute = AppPerfilRouteImport.update({
@@ -75,6 +87,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
   '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
@@ -86,6 +100,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app': typeof AppIndexRoute
   '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
@@ -99,6 +115,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/app/candidaturas': typeof AppCandidaturasRoute
+  '/app/importar': typeof AppImportarRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/': typeof AppIndexRoute
   '/app/curriculos/$resumeId': typeof AppCurriculosResumeIdRoute
@@ -113,6 +131,8 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/onboarding'
+    | '/app/candidaturas'
+    | '/app/importar'
     | '/app/perfil'
     | '/app/'
     | '/app/curriculos/$resumeId'
@@ -124,6 +144,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/onboarding'
+    | '/app/candidaturas'
+    | '/app/importar'
     | '/app/perfil'
     | '/app'
     | '/app/curriculos/$resumeId'
@@ -136,6 +158,8 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/onboarding'
+    | '/app/candidaturas'
+    | '/app/importar'
     | '/app/perfil'
     | '/app/'
     | '/app/curriculos/$resumeId'
@@ -179,6 +203,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/candidaturas': {
+      id: '/app/candidaturas'
+      path: '/candidaturas'
+      fullPath: '/app/candidaturas'
+      preLoaderRoute: typeof AppCandidaturasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/importar': {
+      id: '/app/importar'
+      path: '/importar'
+      fullPath: '/app/importar'
+      preLoaderRoute: typeof AppImportarRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/perfil': {
@@ -227,6 +265,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppCandidaturasRoute: typeof AppCandidaturasRoute
+  AppImportarRoute: typeof AppImportarRoute
   AppPerfilRoute: typeof AppPerfilRoute
   AppIndexRoute: typeof AppIndexRoute
   AppCurriculosResumeIdRoute: typeof AppCurriculosResumeIdRoute
@@ -237,6 +277,8 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCandidaturasRoute: AppCandidaturasRoute,
+  AppImportarRoute: AppImportarRoute,
   AppPerfilRoute: AppPerfilRoute,
   AppIndexRoute: AppIndexRoute,
   AppCurriculosResumeIdRoute: AppCurriculosResumeIdRoute,
